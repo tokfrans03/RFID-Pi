@@ -1,6 +1,11 @@
-rem BACKSPACE
 DELAY 500
+BACKSPACE
+DELAY 500
+TAB
+TAB
+TAB
 STRING UR_PASSWD
+rem ENTER
 
 rem an "ENTER" may be required at the end if you have a pin or a normal password
 rem for some reason it automatically goes straight to the login screen so you might gave to press enter or backspace before your password
