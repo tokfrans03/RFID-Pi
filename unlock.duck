@@ -2,5 +2,5 @@ rem BACKSPACE
 DELAY 500
 STRING UR_PASSWD
 
-rem an "ENTER" is optional if you have a pin or a normal password
+rem an "ENTER" is optional if yo have a pin or a normal password
 rem for some reason it automatically goes straight to the login screen so you might gave to press enter or backspace before
