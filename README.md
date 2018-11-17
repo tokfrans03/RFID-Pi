@@ -1,6 +1,8 @@
 # RFID-Pi
 repo for using a rfid tag to unlock a compuer using a raspberry pi
 
+use MY_Read.py to get your cards uid
+
 Post in question: https://redd.it/9g4owt
 
 # Requirements
