@@ -36,8 +36,8 @@ card_id = ("No cards Yet")
 counter = 0
 state = 0
 
-# 0 = min
-# 1 = vr snubbe
+# 0 = my
+# 1 = other
 
 # Capture SIGINT for cleanup when the script is aborted
 def end_read(signal,frame):
@@ -84,17 +84,17 @@ while continue_reading:
 
 
 		# Print UID
-		card_id = str(uid[0])+str(uid[1])+str(uid[2])+str(uid[3])
-		print "card detected", card_id
+		card_id = "%x:%x:%x:%x" % (uid[0], uid[1], uid[2], uid[3])
+		print "Card detected, UID:", card_id
 
 
-		if (card_id == str(227159199115)) & (lock == 2) & (state == 1):
+		if (card_id == "ex:am:pl:e0") & (lock == 2) & (state == 1):
 			print("my card detected, unlocking if I need to")
 			os.system('python /home/pi/MFRC522-python/unlock_change_to_my.py')
 			print("unlocked")
 			lock = 0
 
-		if (card_id == str(227159199115)) & (lock == 2) & (state == 0):
+		if (card_id == "ex:am:pl:e0") & (lock == 2) & (state == 0):
             print("card detected, unlocking if I need to")
             os.system('python /home/pi/MFRC522-python/unlock_my.py')
             print("unlocked")
@@ -103,18 +103,21 @@ while continue_reading:
 
 
 
-		if (card_id == str(1981012036)) & (lock == 2) & (state == 0):
+		if (card_id == "ex:am:pl:e0") & (lock == 2) & (state == 0):
             print("vr card detected, unlocking if I need to")
             os.system('python /home/pi/MFRC522-python/unlock_change_to_other.py')
             print("unlocked")
             lock = 0
 
 
-        if (card_id == str(1981012036)) & (lock == 2) & (state == 1):
-            print("vr card detected, unlocking if I need to")
+        if (card_id == "ex:am:pl:e0") & (lock == 2) & (state == 1):
+            print("other card detected, unlocking if I need to")
             os.system('python /home/pi/MFRC522-python/unlock_other.py')
             print("unlocked")
             lock = 0
 
+        if ((card_id != "ex:am:pl:e0") & (card_id != "ex:am:pl:e0")):
+			print("No authenticated card detected, locking")
+			lock = 1
 
 		time.sleep(.5)

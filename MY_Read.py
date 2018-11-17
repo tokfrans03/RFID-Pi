@@ -24,23 +24,15 @@
 import RPi.GPIO as GPIO
 import MFRC522
 import signal
-import time
-import os
-import sys
 
 continue_reading = True
 
-
-lock = 0
-card_id = ("No cards Yet")
-counter = 0
-
 # Capture SIGINT for cleanup when the script is aborted
 def end_read(signal,frame):
-	global continue_reading
-	print "Ctrl+C captured, ending read."
-	continue_reading = False
-	GPIO.cleanup()
+    global continue_reading
+    print "Ctrl+C captured, ending read."
+    continue_reading = False
+    GPIO.cleanup()
 
 # Hook the SIGINT
 signal.signal(signal.SIGINT, end_read)
@@ -49,49 +41,26 @@ signal.signal(signal.SIGINT, end_read)
 MIFAREReader = MFRC522.MFRC522()
 
 # Welcome message
-print "Welcome to Tokilokit's lock / unlock script! (Thanks to Mario Gomez for the original script)"
+print "Welcome to the MFRC522 data read example"
 print "Press Ctrl-C to stop."
-
-print(card_id)
 
 # This loop keeps checking for chips. If one is near it will get the UID and authenticate
 while continue_reading:
 
+    # Scan for cards
+    (status,TagType) = MIFAREReader.MFRC522_Request(MIFAREReader.PICC_REQIDL)
 
+    # If a card is found
+    if status == MIFAREReader.MI_OK:
+        print "Card detected"
 
-	# Scan for cards
-	(status,TagType) = MIFAREReader.MFRC522_Request(MIFAREReader.PICC_REQIDL)
+    # Get the UID of the card
+    (status,uid) = MIFAREReader.MFRC522_Anticoll()
 
-	# Get the UID of the card
-	(status,uid) = MIFAREReader.MFRC522_Anticoll()
+    # If we have the UID, continue
+    if status == MIFAREReader.MI_OK:
 
-	if status != MIFAREReader.MI_OK:
-		counter = counter + 1
-		print counter
-		if counter >= 3:
-			counter = 3
-		if (counter == 2):
-			os.system('python /home/pi/MFRC522-python/lock.py')
-			lock = 2
+        # Print UID
+        print "Card read UID: %x:%x:%x:%x" % (uid[0], uid[1], uid[2], uid[3])
 
-	# If we have the UID, continue
-	if status == MIFAREReader.MI_OK:
-		counter = 0
-
-
-		# Print UID
-		card_id = "%x:%x:%x:%x" % (uid[0], uid[1], uid[2], uid[3])
-		print "Card detected, UID:", card_id
-
-
-		if (card_id == "ex:am:pl:e0") & (lock == 2):
-			print("card detected, unlocking if I need to")
-			os.system('python /home/pi/MFRC522-python/unlock.py')
-			print("unlocked")
-			lock = 0
-
-		if ((card_id != "ex:am:pl:e0")):
-			print("No authenticated card detected, locking")
-			lock = 2
-
-		time.sleep(.5)
+    
