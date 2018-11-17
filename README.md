@@ -108,9 +108,9 @@ Also, write down the card’s UID without commas
 
 Once you’ve rebooted and plugged your pi into your pc with the data port you’re ready to continue
 
-Download this git: https://github.com/tokfrans03/RFID-Pi.git
+Download this zip: https://drive.google.com/file/d/106jizbTNawo1rrIz7kWOKEU6TUNFnPR_/view?usp=sharing
 
-It contains the RFID python script, lock and unlock duck scripts.
+It contains the RFID python script, lock and unlock ducky scripts.
 
 Place them inside the MFRC522-python folder and make sure that the directory locations in "key_card_lock.py" are correct for the unlock/lock scripts
 Don't forget to add your card UID at line 87 without commas
@@ -153,7 +153,7 @@ To make this auto start on boot you need to make a .sh file with this in it:
 
 sleep 10 #optional
 python path/to/script.py
-​
+
 and make it runnable: chmod +x startup.sh
 when that's done type "sudo crontab -e" it will probably ask you what editor you want to use so choose one ( id recommend nano) then paste this at the bottom:
 
@@ -162,6 +162,7 @@ when that's done type "sudo crontab -e" it will probably ask you what editor you
 
 ##For any further questions/support just ask!
 
-and my wallper: https://steamcommunity.com/sharedfiles/filedetails/?id=1322008613
+and my wallpaper: https://steamcommunity.com/sharedfiles/filedetails/?id=1322008613
 
 Edit: I’ve made it work with dual profiles/rfid tags so just ask ;)
+EDIT2: made a Github https://github.com/tokfrans03/RFID-Pi
