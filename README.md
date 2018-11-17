@@ -108,7 +108,7 @@ Also, write down the card’s UID without commas
 
 Once you’ve rebooted and plugged your pi into your pc with the data port you’re ready to continue
 
-Download this zip: https://drive.google.com/file/d/106jizbTNawo1rrIz7kWOKEU6TUNFnPR_/view?usp=sharing
+Download this git: https://github.com/tokfrans03/RFID-Pi.git
 
 It contains the RFID python script, lock and unlock ducky scripts.
 
