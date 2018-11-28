@@ -155,9 +155,9 @@ You can skip typing the last letters of your password for some extra security
 
 To make this auto start on boot you need to make a .sh file with this in it:
 
-´sleep 10 #optional
+sleep 10 #optional
 
-python path/to/script.py´
+python path/to/script.py
 
 and make it runnable: chmod +x startup.sh
 when that's done type "sudo crontab -e" it will probably ask you what editor you want to use so choose one ( id recommend nano) then paste this at the bottom:
